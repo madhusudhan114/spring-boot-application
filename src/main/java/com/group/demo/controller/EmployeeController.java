@@ -1,6 +1,7 @@
 package com.group.demo.controller;
 
 
+import com.group.demo.dto.EmployeeDto;
 import com.group.demo.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseCookie;
@@ -14,18 +15,14 @@ public class EmployeeController {
     EmployeeService employeeService;
 
     @GetMapping("/employees/{id}")
-    ResponseEntity<String> getEmployeeById(@PathVariable("id") String id) {
+    public ResponseEntity<String> getEmployeeById(@PathVariable("id") String id) {
         return ResponseEntity.ok(id);
     }
 
     @GetMapping("/employees")
-    ResponseEntity<Integer> getEmployees(@RequestParam("status") String status, @RequestParam("department") String department, @RequestParam("age") Integer age) {
-        System.out.println(status);
-        System.out.println(department);
-        System.out.println(age);
-        String response = employeeService.getEmployees(department);
-        System.out.println(response);
-        return ResponseEntity.ok(age);
+    public ResponseEntity<EmployeeDto> getEmployees(@RequestParam(required = false) String status, @RequestParam(required = false) String department, @RequestParam(defaultValue = "22") Integer age) {
+        EmployeeDto employee = employeeService.getEmployees(department);
+        return ResponseEntity.ok(employee);
     }
 
 }

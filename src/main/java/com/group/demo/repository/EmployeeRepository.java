@@ -1,11 +1,13 @@
 package com.group.demo.repository;
 
 
+import com.group.demo.model.entity.Employee;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class EmployeeRepository {
-    public String getEmployees(String id) {
-        return "Madhusudhan";
+    public Employee getEmployees() {
+        Employee employee = new Employee("Madhusudhan", "IT", 32);
+        return employee;
     }
 }
